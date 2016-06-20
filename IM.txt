@@ -1,0 +1,70 @@
+服务器ip 与port -----------------------------------------------------------
+192.168.0.148  8090
+消息对象                ---------------------------------------------------------------
+     String type = QQMessageType.MSG_TYPE_CHAT_P2P;// 类型的数据 chat login
+	 String from = 0;// 发送者 account
+	 String fromNick = "";// 昵称
+	 int fromAvatar = 1;// 头像
+	 String to = 0; // 接收者 account
+	 String content = ""; // 消息的内容  约不?
+	 String sendTime = MyTime.geTime(); // 发送时间
+类型字段              ---------------------------------------------------------------
+   	public static final String MSG_TYPE_REGISTER = "register";// 注册
+	public static final String MSG_TYPE_LOGIN = "login";// 登录
+	public static final String MSG_TYPE_LOGIN_OUT = "loginout";// 登出
+	public static final String MSG_TYPE_CHAT_P2P = "chatp2p";// 聊天
+	public static final String MSG_TYPE_CHAT_ROOM = "chatroom";// 群聊
+	public static final String MSG_TYPE_OFFLINE = "offline";// 下线
+	public static final String MSG_TYPE_SUCCESS = "success";//成功
+	public static final String MSG_TYPE_BUDDY_LIST = "buddylist";// 好友
+	public static final String MSG_TYPE_FAILURE = "failure";// 失败
+1.拼接字符串  xml
+<QQMessage>
+  <type>chatp2p</type>
+  <from>1000</from>
+  <fromNick>大侠</fromNick>
+  <fromAvatar>1</fromAvatar>
+  <to>2000</to>
+  <content>约不？</content>
+  <sendTime>05-17 23:17:53</sendTime>
+</QQMessage>
+2.传输的数据包的格式 xml
+<QQMessage>
+  <type>chatp2p</type>
+  <from>1000</from>
+  <fromNick>大侠</fromNick>
+  <fromAvatar>1</fromAvatar>
+  <to>2000</to>
+  <content>约不？</content>
+  <sendTime>05-17 23:17:53</sendTime>
+</QQMessage>
+###################登录接口#######################################
+account#password  账号与密码  to Server  101 test
+
+<QQMessage>
+  <type>login</type>
+  <sender>0</sender>
+  <senderNick></senderNick>
+  <senderAvatar>1</senderAvatar>
+  <receiver>0</receiver>
+  <content>1001#123</content>
+  <sendTime>05-09 13:01:46</sendTime>
+</QQMessage>
+登录成功:返回好友列表  其他都是 失败
+<QQMessage>
+  <type>buddylist</type>
+  <from>0</from>
+  <fromNick></fromNick>
+  <fromAvatar>1</fromAvatar>
+  <to>0</to>
+  <content>{&quot;buddyList&quot;:[{&quot;account&quot;:101,&quot;nick&quot;:&quot;QQ 1&quot;,&quot;avatar&quot;:0}]}</content>
+  <sendTime>05-21 21:51:39</sendTime>
+</QQMessage>
+###################聊天接口######################################
+content  "约不？"  
+type  chatp2p 
+from 老王 
+to  大头
+###################下线接口######################################
+type offline
+from 老王
