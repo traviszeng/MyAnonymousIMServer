@@ -36,7 +36,10 @@ public class LoginMsgListener extends MessageSender implements OnRecevieMsgListe
 						// 存在
 						if (user.password.equals(pwd)) {
 							// 登录 成功
+							//并且没有同一账号登陆的用户
+							
 							toClient.type = QQMessageType.MSG_TYPE_BUDDY_LIST;
+							toClient.newAddAccount=user.account;
 							// 返回在线名单
 							// 创建带身份的连接对象
 							conn.who = user;
@@ -44,7 +47,34 @@ public class LoginMsgListener extends MessageSender implements OnRecevieMsgListe
 							QQBuddyList list = QQConnectionManager.list;
 							toClient.content = list.toJson();
 							toEveryClient(toClient);
-						} else {
+						}
+					/*	else if(user.password.equals(pwd)&&user.allowed_back_online==false){
+							//账号登陆成功，但是有其他使用同一账号的用户在使用
+							toClient.existAnother = true;  //存在使用同一账户登陆的用户
+							toClient.type=QQMessageType.MSG_TYPE_BUDDY_LIST;
+							// 返回在线名单
+							// 创建带身份的连接对象
+							conn.who = user;
+							QQConnectionManager.put(user.account, conn);
+							QQBuddyList list = QQConnectionManager.list;
+							toClient.content = list.toJson();
+							toOtherClient(toClient);
+							
+							//现在登陆的账户的信息另外发
+							toClient.existAnother=false;
+							toClient.type=QQMessageType.MSG_TYPE_BUDDY_LIST;
+							// 返回在线名单
+							// 创建带身份的连接对象
+							conn.who = user;
+							QQConnectionManager.put(user.account, conn);
+							list = QQConnectionManager.list;
+							toClient.content = list.toJson();
+							
+							toClient(toClient,conn);
+							
+						}*/
+						
+						 else {
 							toClient.type = QQMessageType.MSG_TYPE_FAILURE;
 							toClient.content = "失败";
 							toClient(toClient, conn);

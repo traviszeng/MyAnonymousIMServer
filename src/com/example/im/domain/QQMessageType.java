@@ -11,5 +11,5 @@ public class QQMessageType {
 	public static final String MSG_TYPE_SUCCESS = "success";//≥…π¶
 	public static final String MSG_TYPE_BUDDY_LIST = "buddylist";// ∫√”—
 	public static final String MSG_TYPE_FAILURE = "failure";//  ß∞‹
-
+	
 }

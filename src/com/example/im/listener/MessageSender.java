@@ -40,7 +40,7 @@ public class MessageSender {
 	}
 
 	public void toOtherClient(QQMessage msg) throws IOException {
-		System.out.println("群发所有其他客户端  to toEveryClient Client \n"
+		System.out.println("群发所有其他客户端  to toEveryOtherClient Client \n"
 				+ msg.toXml());
 		// conn.writer.writeUTF(toClient.toXml());
 		Set<Map.Entry<Long, QQConnection>> allOnLines = QQConnectionManager.conns

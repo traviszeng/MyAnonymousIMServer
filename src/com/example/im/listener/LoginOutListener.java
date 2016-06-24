@@ -3,8 +3,10 @@ package com.example.im.listener;
 import com.example.im.core.QQConnection;
 import com.example.im.core.QQConnectionManager;
 import com.example.im.core.QQConnection.OnRecevieMsgListener;
+import com.example.im.domain.Db;
 import com.example.im.domain.QQMessage;
 import com.example.im.domain.QQMessageType;
+import com.example.im.domain.QQUser;
 
 
 public class LoginOutListener extends MessageSender implements OnRecevieMsgListener {
