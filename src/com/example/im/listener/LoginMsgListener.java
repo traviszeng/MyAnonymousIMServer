@@ -34,7 +34,7 @@ public class LoginMsgListener extends MessageSender implements OnRecevieMsgListe
 						toClient(toClient, conn);
 					} else {
 						// 存在
-						if (user.password.equals(pwd)) {
+						if (user.password.equals(pwd)&&user.allowed_back_online==true) {
 							// 登录 成功
 							//并且没有同一账号登陆的用户
 							
@@ -47,8 +47,9 @@ public class LoginMsgListener extends MessageSender implements OnRecevieMsgListe
 							QQBuddyList list = QQConnectionManager.list;
 							toClient.content = list.toJson();
 							toEveryClient(toClient);
+							user.allowed_back_online=false;
 						}
-					/*	else if(user.password.equals(pwd)&&user.allowed_back_online==false){
+						else if(user.password.equals(pwd)&&user.allowed_back_online==false){
 							//账号登陆成功，但是有其他使用同一账号的用户在使用
 							toClient.existAnother = true;  //存在使用同一账户登陆的用户
 							toClient.type=QQMessageType.MSG_TYPE_BUDDY_LIST;
@@ -69,10 +70,9 @@ public class LoginMsgListener extends MessageSender implements OnRecevieMsgListe
 							QQConnectionManager.put(user.account, conn);
 							list = QQConnectionManager.list;
 							toClient.content = list.toJson();
-							
 							toClient(toClient,conn);
 							
-						}*/
+						}
 						
 						 else {
 							toClient.type = QQMessageType.MSG_TYPE_FAILURE;
